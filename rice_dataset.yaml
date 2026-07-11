@@ -1,0 +1,8 @@
+
+path: /content/drive/MyDrive/RiceGrowthProject  
+train: images/train  
+val: images/val      
+
+names:
+  0: rice
+  1: weed

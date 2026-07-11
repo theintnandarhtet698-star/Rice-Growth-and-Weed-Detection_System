@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard - Rice Growth & Weed Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container-fluid">
+  <div class="row">
+    <!-- Sidebar -->
+    <nav class="col-md-2 d-none d-md-block bg-success sidebar">
+      <div class="sidebar-sticky">
+        <h5 class="text-white mt-3">Menu</h5>
+        <ul class="nav flex-column">
+          <li class="nav-item"><a class="nav-link text-white" href="/admin">Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="/history">Data Records</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="#">Threshold Settings</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="#">Weed Rules</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="#">Audit Logs</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="#">User Accounts</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+      <h2 class="text-success my-4">Admin Dashboard – Rice Growth & Weed Detection System</h2>
+
+      <!-- Summary Cards -->
+      <div class="row mb-4">
+        <div class="col-md-3"><div class="card text-center"><div class="card-body">
+          <h5>Total Records</h5><p>{{ total_records }}</p>
+        </div></div></div>
+        <div class="col-md-3"><div class="card text-center"><div class="card-body">
+          <h5>Pending Reviews</h5><p>{{ pending_reviews }}</p>
+        </div></div></div>
+        <div class="col-md-3"><div class="card text-center"><div class="card-body">
+          <h5>AI Alerts</h5><p>{{ alerts }}</p>
+        </div></div></div>
+        <div class="col-md-3"><div class="card text-center"><div class="card-body">
+          <h5>Nutrient Alerts Sent</h5><p>{{ nutrient_alerts }}</p>
+        </div></div></div>
+      </div>
+
+      <!-- Records Table -->
+      <h4>Recent Data Records</h4>
+      <table class="table table-bordered table-striped">
+        <thead class="table-success">
+          <tr>
+            <th>ID</th><th>Variety</th><th>Age</th><th>Height</th>
+            <th>Weed Count</th><th>Growth Status</th><th>Advice</th><th>Timestamp</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for r in records %}
+          <tr>
+            <td>{{ r.id }}</td>
+            <td>{{ r.variety }}</td>
+            <td>{{ r.age }}</td>
+            <td>{{ r.height }}</td>
+            <td>{{ r.weed_count }}</td>
+            <td>{{ r.growth_status }}</td>
+            <td>{{ r.advice }}</td>
+            <td>{{ r.timestamp }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <!-- Thresholds & Weed Rules -->
+      <div class="row mt-4">
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header bg-success text-white">Growth Thresholds</div>
+            <div class="card-body">
+              <p>7 Days Minimum Height: 10 cm</p>
+              <p>15 Days Minimum Height: 20 cm</p>
+              <p>30 Days Minimum Height: 30 cm</p>
+              <button class="btn btn-outline-success">Edit Thresholds</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header bg-success text-white">Weed Detection Rules</div>
+            <div class="card-body">
+              <p>Green Coverage = 25%</p>
+              <p>Yellow Coverage = 35%</p>
+              <p>Red Coverage = 55%</p>
+              <button class="btn btn-outline-success">Update Rules</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Audit Logs -->
+      <div class="card mt-4">
+        <div class="card-header bg-secondary text-white">Audit Logs</div>
+        <div class="card-body">
+          <p>Admin deleted record ID 01232 at 11:15 AM</p>
+          <p>Admin updated thresholds at 10:32 AM</p>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+</body>
+</html>

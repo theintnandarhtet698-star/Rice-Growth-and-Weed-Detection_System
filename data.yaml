@@ -1,0 +1,8 @@
+path: /content/drive/MyDrive/RiceGrowthProject/rice_leaf_diseases/rice_disease
+train: train
+val: val
+
+names:
+  0: Bacterial leaf blight
+  1: Brown spot
+  2: Leaf smut
